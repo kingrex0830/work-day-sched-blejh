@@ -2,22 +2,101 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
+  // Save text content to local storage
+  $(".btn").click(function(event){
+    event.preventDefault()
+    var timeId = $(this).parent().attr('id');
+    var userInput = $(this).siblings('textarea').val()
+    localStorage.setItem(timeId, userInput)
+  })
+  // Get the current time and set it as a variable
+  var date24 = dayjs().format("H")
+  // Go through each time block and determine whether the present, past, or future classes should be applied
+  if (date24 == 9) {
+    $("#hour-9").addClass("present")
+  } else if (date24 > 9) {
+    $("#hour-9").addClass("past")
+  } else if (date24 < 9) {
+    $("#hour-9").addClass("future")
+  }
+
+  if (date24 == 10) {
+    $("#hour-10").addClass("present")
+  } else if (date24 > 10) {
+    $("#hour-10").addClass("past")
+  } else if (date24 < 10) {
+    $("#hour-10").addClass("future")
+  }
+
+  if (date24 == 11) {
+    $("#hour-11").addClass("present")
+  } else if (date24 > 11) {
+    $("#hour-11").addClass("past")
+  } else if (date24 < 11) {
+    $("#hour-11").addClass("future")
+  }
+
+  if (date24 == 12) {
+    $("#hour-12").addClass("present")
+  } else if (date24 > 12) {
+    $("#hour-12").addClass("past")
+  } else if (date24 < 12) {
+    $("#hour-12").addClass("future")
+  }
+
+  if (date24 == 13) {
+    $("#hour-1").addClass("present")
+  } else if (date24 > 13) {
+    $("#hour-1").addClass("past")
+  } else if (date24 < 13) {
+    $("#hour-1").addClass("future")
+  }
+
+  if (date24 == 14) {
+    $("#hour-2").addClass("present")
+  } else if (date24 > 14) {
+    $("#hour-2").addClass("past")
+  } else if (date24 < 14) {
+    $("#hour-2").addClass("future")
+  }
+
+  if (date24 == 15) {
+    $("#hour-3").addClass("present")
+  } else if (date24 > 15) {
+    $("#hour-3").addClass("past")
+  } else if (date24 < 15) {
+    $("#hour-3").addClass("future")
+  }
+
+  if (date24 == 16) {
+    $("#hour-4").addClass("present")
+  } else if (date24 > 16) {
+    $("#hour-4").addClass("past")
+  } else if (date24 < 16) {
+    $("#hour-4").addClass("future")
+  }
+
+  if (date24 == 17) {
+    $("#hour-5").addClass("present")
+  } else if (date24 > 17) {
+    $("#hour-5").addClass("past")
+  } else if (date24 < 17) {
+    $("#hour-5").addClass("future")
+  }
+
+  // Retrive user input from local storage and set it to the text content of the text areas
+  $(".time-block").each(function() {
+    var timeID = $(this).attr("id")
+    console.log(timeID)
+    var textArea = localStorage.getItem(timeID)
+    console.log(textArea)
+    if (textArea) {
+      $(this).find("textarea").val(textArea)
+    }
+  })
+
   // TODO: Add code to display the current date in the header of the page.
+  var currentDay = $("#currentDay")
+  var date = dayjs().format("MMMM D YYYY")
+  currentDay.text(date)
 });
